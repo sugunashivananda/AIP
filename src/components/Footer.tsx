@@ -1,19 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FooterWrapper = styled.footer`
-  background-color: ${({ theme }) => theme.colors.secondary};
-  color: white;
-  text-align: center;
+const FooterContainer = styled.footer`
+  background-color: ${({ theme }) => theme.colors.white};
   padding: ${({ theme }) => theme.spacing.md};
+  text-align: center;
+  border-top: 1px solid ${({ theme }) => theme.colors.neutralLight};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  color: ${({ theme }) => theme.colors.neutral};
 `;
 
 const Footer: React.FC = () => {
   return (
-    <FooterWrapper>
-      &copy; {new Date().getFullYear()} Invoice Dashboard. All rights reserved.
-    </FooterWrapper>
+    <FooterContainer>
+      &copy; {new Date().getFullYear()} Invoice App. All rights reserved.
+    </FooterContainer>
   );
 };
 
