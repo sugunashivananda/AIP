@@ -2,14 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { sidebarMenu } from '../data/mockData';
 
-const SidebarContainer = styled.nav`
-  width: 240px;
+const SidebarContainer = styled.aside`
+  width: 250px;
   background-color: ${({ theme }) => theme.colors.surface};
-  padding: ${({ theme }) => theme.spacing(3)} 0;
+  border-right: 1px solid ${({ theme }) => theme.colors.border};
+  padding: ${({ theme }) => theme.spacing(3)};
   display: flex;
   flex-direction: column;
-  border-right: 1px solid ${({ theme }) => theme.colors.border};
-  height: 100vh;
 `;
 
 const MenuList = styled.ul`
@@ -19,49 +18,36 @@ const MenuList = styled.ul`
 `;
 
 const MenuItem = styled.li`
-  margin: 0;
+  margin-bottom: ${({ theme }) => theme.spacing(2)};
 `;
 
 const MenuLink = styled.a`
-  display: flex;
-  align-items: center;
-  padding: ${({ theme }) => theme.spacing(2)} ${({ theme }) => theme.spacing(3)};
-  color: ${({ theme }) => theme.colors.textSecondary};
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
   text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
+  display: block;
+  padding: ${({ theme }) => theme.spacing(1)} ${({ theme }) => theme.spacing(2)};
+  border-radius: 4px;
   &:hover, &:focus {
-    background-color: ${({ theme }) => theme.colors.primaryLight};
-    color: ${({ theme }) => theme.colors.surface};
+    background-color: ${({ theme }) => theme.colors.background};
     outline: none;
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-    outline-offset: 2px;
-  }
-
-  & > span {
-    margin-right: ${({ theme }) => theme.spacing(2)};
-    font-size: 1.25rem;
   }
 `;
 
-export const Sidebar: React.FC = () => {
+const Sidebar: React.FC = () => {
   return (
-    <SidebarContainer aria-label="Main navigation">
-      <MenuList>
-        {sidebarMenu.map(({ id, label, icon, href }) => (
-          <MenuItem key={id}>
-            <MenuLink href={href} tabIndex={0}>
-              <span aria-hidden="true">{icon}</span>
-              {label}
-            </MenuLink>
-          </MenuItem>
-        ))}
-      </MenuList>
+    <SidebarContainer aria-label="Sidebar navigation">
+      <nav>
+        <MenuList>
+          {sidebarMenu.map((item) => (
+            <MenuItem key={item.id}>
+              <MenuLink href={item.link}>{item.label}</MenuLink>
+            </MenuItem>
+          ))}
+        </MenuList>
+      </nav>
     </SidebarContainer>
   );
 };
+
+export default Sidebar;
