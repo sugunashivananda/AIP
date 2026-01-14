@@ -2,58 +2,45 @@ import React from 'react';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
-  background-color: ${({ theme }) => theme.colors.white};
-  padding: ${({ theme }) => theme.spacing.lg};
+  background-color: ${({ theme }) => theme.colors.surface};
+  padding: ${({ theme }) => theme.spacing(2)};
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.neutralLight};
+  justify-content: space-between;
 `;
 
 const Title = styled.h1`
-  font-size: ${({ theme }) => theme.typography.fontSize.xl};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+  font-size: 1.5rem;
   color: ${({ theme }) => theme.colors.primary};
   margin: 0;
 `;
 
-const Nav = styled.nav`
+const UserProfile = styled.div`
   display: flex;
-  gap: ${({ theme }) => theme.spacing.md};
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(1)};
 `;
 
-const NavButton = styled.button`
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: ${({ theme }) => theme.typography.fontSize.md};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  cursor: pointer;
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-  border-radius: ${({ theme }) => theme.borderRadius};
-
-  &:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.primaryLight};
-    outline-offset: 2px;
-  }
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.primaryLight};
-    color: ${({ theme }) => theme.colors.white};
-  }
+const Avatar = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 `;
 
-const Header: React.FC = () => {
+const UserName = styled.span`
+  font-weight: ${({ theme }) => theme.typography.fontWeightBold};
+  color: ${({ theme }) => theme.colors.textPrimary};
+`;
+
+export const Header: React.FC = () => {
   return (
     <HeaderContainer>
-      <Title>Invoice App</Title>
-      <Nav aria-label="Primary">
-        <NavButton type="button">Dashboard</NavButton>
-        <NavButton type="button">Invoices</NavButton>
-        <NavButton type="button">Settings</NavButton>
-      </Nav>
+      <Title>Invoice Dashboard</Title>
+      <UserProfile>
+        <Avatar src="https://i.pravatar.cc/40" alt="User avatar" />
+        <UserName>John Doe</UserName>
+      </UserProfile>
     </HeaderContainer>
   );
 };
-
-export default Header;
