@@ -1,27 +1,42 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface BadgeProps {
-  $status: 'Paid' | 'Pending' | 'Overdue';
+  $status: 'positive' | 'warning' | 'error' | 'neutral';
   children: React.ReactNode;
 }
 
-const statusColors = {
-  Paid: 'green',
-  Pending: 'orange',
-  Overdue: 'red',
+const statusStyles = {
+  positive: css`
+    background-color: ${({ theme }) => theme.colors.success};
+    color: white;
+  `,
+  warning: css`
+    background-color: ${({ theme }) => theme.colors.warning};
+    color: black;
+  `,
+  error: css`
+    background-color: ${({ theme }) => theme.colors.error};
+    color: white;
+  `,
+  neutral: css`
+    background-color: ${({ theme }) => theme.colors.border};
+    color: ${({ theme }) => theme.colors.textSecondary};
+  `,
 };
 
-const BadgeContainer = styled.span<BadgeProps>`
+const StyledBadge = styled.span<BadgeProps>`
   display: inline-block;
-  padding: ${({ theme }) => theme.spacing(0.5)} ${({ theme }) => theme.spacing(1)};
-  border-radius: ${({ theme }) => theme.borderRadius};
-  font-size: 0.875rem;
+  padding: 0 ${({ theme }) => theme.spacing(1)};
+  font-size: 0.75rem;
   font-weight: ${({ theme }) => theme.typography.fontWeightBold};
-  color: white;
-  background-color: ${({ $status }) => statusColors[$status] || 'gray'};
+  border-radius: 12px;
+  line-height: 1.5;
+  ${({ $status }) => statusStyles[$status] || statusStyles.neutral}
 `;
 
-export const Badge: React.FC<BadgeProps> = ({ $status, children }) => {
-  return <BadgeContainer $status={$status}>{children}</BadgeContainer>;
+const Badge: React.FC<Omit<BadgeProps, '$status'> & { status: BadgeProps['$status'] }> = ({ status, children }) => {
+  return <StyledBadge $status={status}>{children}</StyledBadge>;
 };
+
+export default Badge;
