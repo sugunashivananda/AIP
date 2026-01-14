@@ -2,37 +2,24 @@ import { DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
   colors: {
-    primary: '#7C5DFA',
-    primaryLight: '#9277FF',
-    neutral: '#888EB0',
-    neutralLight: '#DFE3FA',
-    background: '#F8F8FB',
-    white: '#FFFFFF',
-    black: '#0C0E16',
-    error: '#EC5757',
-    success: '#33D69F',
-    warning: '#FF8F00'
+    primary: '#4F46E5',
+    primaryLight: '#6366F1',
+    secondary: '#6B7280',
+    background: '#F9FAFB',
+    surface: '#FFFFFF',
+    textPrimary: '#111827',
+    textSecondary: '#6B7280',
+    border: '#E5E7EB',
+    accent: '#F59E0B',
+    error: '#EF4444',
   },
-  spacing: {
-    xs: '4px',
-    sm: '8px',
-    md: '16px',
-    lg: '24px',
-    xl: '32px'
-  },
+  spacing: (factor: number) => `${factor * 8}px`,
   typography: {
-    fontFamily: "'Spartan', sans-serif",
-    fontSize: {
-      sm: '12px',
-      md: '15px',
-      lg: '18px',
-      xl: '24px'
-    },
-    fontWeight: {
-      regular: 400,
-      medium: 500,
-      bold: 700
-    }
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '16px',
+    fontWeightRegular: 400,
+    fontWeightBold: 700,
+    lineHeight: 1.5,
   },
-  borderRadius: '8px'
+  borderRadius: '8px',
 };
