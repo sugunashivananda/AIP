@@ -7,13 +7,12 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
-    padding: 0;
     font-family: ${({ theme }) => theme.typography.fontFamily};
     font-size: ${({ theme }) => theme.typography.fontSize.md};
-    font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
     background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.text};
-    line-height: 1.5;
+    color: ${({ theme }) => theme.colors.black};
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   a {
@@ -21,22 +20,14 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
-  a:hover, a:focus {
-    text-decoration: underline;
-    outline: none;
+  a:focus, button:focus {
+    outline: 2px solid ${({ theme }) => theme.colors.primaryLight};
+    outline-offset: 2px;
   }
 
   button {
     font-family: inherit;
-    font-size: inherit;
     cursor: pointer;
-    border: none;
-    background: none;
-  }
-
-  button:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
-    outline-offset: 2px;
   }
 
   table {
@@ -45,18 +36,20 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   th, td {
-    padding: ${({ theme }) => theme.spacing.sm};
     text-align: left;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+    padding: ${({ theme }) => theme.spacing.sm};
   }
 
   th {
-    font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+    background-color: ${({ theme }) => theme.colors.neutralLight};
+    font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
   }
 
-  /* Accessibility focus styles */
-  :focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
-    outline-offset: 2px;
+  tr:nth-child(even) {
+    background-color: ${({ theme }) => theme.colors.white};
+  }
+
+  tr:nth-child(odd) {
+    background-color: ${({ theme }) => theme.colors.background};
   }
 `;
