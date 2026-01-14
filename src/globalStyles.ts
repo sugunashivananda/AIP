@@ -8,11 +8,10 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-family: ${({ theme }) => theme.typography.fontFamily};
-    font-size: ${({ theme }) => theme.typography.fontSize.md};
+    font-size: ${({ theme }) => theme.typography.fontSize};
+    line-height: ${({ theme }) => theme.typography.lineHeight};
     background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.black};
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    color: ${({ theme }) => theme.colors.textPrimary};
   }
 
   a {
@@ -20,36 +19,17 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
-  a:focus, button:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.primaryLight};
-    outline-offset: 2px;
+  a:hover, a:focus {
+    text-decoration: underline;
+    outline: none;
   }
 
   button {
     font-family: inherit;
-    cursor: pointer;
   }
 
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  th, td {
-    text-align: left;
-    padding: ${({ theme }) => theme.spacing.sm};
-  }
-
-  th {
-    background-color: ${({ theme }) => theme.colors.neutralLight};
-    font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-  }
-
-  tr:nth-child(even) {
-    background-color: ${({ theme }) => theme.colors.white};
-  }
-
-  tr:nth-child(odd) {
-    background-color: ${({ theme }) => theme.colors.background};
+  :focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.accent};
+    outline-offset: 2px;
   }
 `;
