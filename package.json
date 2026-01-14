@@ -1,5 +1,5 @@
 {
-  "name": "aip-dashboard",
+  "name": "aip",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,17 +7,15 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.tsx",
-    "format": "prettier --write .",
-    "test": "vitest"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.27",
+    "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
-    "@vitejs/plugin-react": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^5.59.9",
     "@typescript-eslint/parser": "^5.59.9",
     "eslint": "^8.39.0",
@@ -27,6 +25,6 @@
     "prettier": "^2.8.8",
     "typescript": "^5.0.4",
     "vite": "^4.3.9",
-    "vitest": "^0.29.8"
+    "@vitejs/plugin-react": "^3.1.0"
   }
 }
