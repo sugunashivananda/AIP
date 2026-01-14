@@ -1,24 +1,38 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface BadgeProps {
-  $color?: string;
+  status: string;
   children: React.ReactNode;
 }
 
-const StyledBadge = styled.span<BadgeProps>`
+const statusStyles = {
+  paid: css`
+    background-color: #33d69f;
+    color: white;
+  `,
+  pending: css`
+    background-color: #ff8f00;
+    color: white;
+  `,
+  draft: css`
+    background-color: #888eb0;
+    color: white;
+  `
+};
+
+const BadgeContainer = styled.span<{ $status: string }>`
   display: inline-block;
-  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  color: white;
-  background-color: ${({ $color, theme }) => $color || theme.colors.primary};
+  padding: 0.25em 0.75em;
   border-radius: 12px;
-  user-select: none;
+  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  text-transform: capitalize;
+  ${({ $status }) => statusStyles[$status.toLowerCase()] || statusStyles.draft}
 `;
 
-const Badge: React.FC<BadgeProps> = ({ $color, children }) => {
-  return <StyledBadge $color={$color}>{children}</StyledBadge>;
+const Badge: React.FC<BadgeProps> = ({ status, children }) => {
+  return <BadgeContainer $status={status}>{children}</BadgeContainer>;
 };
 
 export default Badge;
