@@ -1,79 +1,60 @@
 import React from 'react';
 import styled from 'styled-components';
-import Badge from './ui/Badge';
 import { tableData } from '../data/mockData';
+import Badge from './ui/Badge';
 
-const TableWrapper = styled.section`
-  padding: ${({ theme }) => theme.spacing.lg};
-  overflow-x: auto;
-`;
-
-const StyledTable = styled.table`
+const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
 `;
 
-const TableHead = styled.thead`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: white;
+const Thead = styled.thead`
+  background-color: ${({ theme }) => theme.colors.neutralLight};
 `;
 
-const TableRow = styled.tr`
-  &:nth-child(even) {
-    background-color: ${({ theme }) => theme.colors.background};
-  }
-`;
-
-const TableHeader = styled.th`
+const Th = styled.th`
   padding: ${({ theme }) => theme.spacing.sm};
   text-align: left;
+  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
 `;
 
-const TableCell = styled.td`
+const Td = styled.td`
   padding: ${({ theme }) => theme.spacing.sm};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.neutralLight};
 `;
 
-const getStatusColor = (status: string, theme: any) => {
-  switch (status.toLowerCase()) {
-    case 'paid':
-      return theme.colors.success;
-    case 'pending':
-      return theme.colors.warning;
-    case 'overdue':
-      return theme.colors.error;
-    default:
-      return theme.colors.muted;
-  }
-};
+const StatusTd = styled(Td)<{ $status: string }>`
+  text-align: center;
+`;
 
 const InvoicesTable: React.FC = () => {
   return (
-    <TableWrapper aria-label="Invoices Table">
-      <StyledTable>
-        <TableHead>
-          <TableRow>
-            <TableHeader>Invoice ID</TableHeader>
-            <TableHeader>Client</TableHeader>
-            <TableHeader>Date</TableHeader>
-            <TableHeader>Amount</TableHeader>
-            <TableHeader>Status</TableHeader>
-          </TableRow>
-        </TableHead>
+    <main>
+      <Table aria-label="Invoices Table">
+        <Thead>
+          <tr>
+            <Th>Invoice ID</Th>
+            <Th>Client</Th>
+            <Th>Due Date</Th>
+            <Th>Total</Th>
+            <Th>Status</Th>
+          </tr>
+        </Thead>
         <tbody>
-          {tableData.map(({ id, client, date, amount, status }) => (
-            <TableRow key={id} tabIndex={0}>
-              <TableCell>{id}</TableCell>
-              <TableCell>{client}</TableCell>
-              <TableCell>{new Date(date).toLocaleDateString()}</TableCell>
-              <TableCell>${amount.toFixed(2)}</TableCell>
-              <TableCell>
-                <Badge $color={(theme) => getStatusColor(status, theme)}>{status}</Badge>
-              </TableCell>
-            </TableRow>
+          {tableData.map(({ id, client, dueDate, total, status }) => (
+            <tr key={id}>
+              <Td>{id}</Td>
+              <Td>{client}</Td>
+              <Td>{dueDate}</Td>
+              <Td>{total}</Td>
+              <StatusTd $status={status}>
+                <Badge status={status}>{status}</Badge>
+              </StatusTd>
+            </tr>
           ))}
         </tbody>
-      </StyledTable>
-    </TableWrapper>
+      </Table>
+    </main>
   );
 };
 
