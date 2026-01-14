@@ -1,61 +1,70 @@
 import React from 'react';
 import styled from 'styled-components';
 import { tableData } from '../data/mockData';
-import Badge from './ui/Badge';
+import { Badge } from './ui/Badge';
 
-const Table = styled.table`
+const TableContainer = styled.section`
+  flex: 1;
+  padding: ${({ theme }) => theme.spacing(3)};
+  background-color: ${({ theme }) => theme.colors.surface};
+  overflow-x: auto;
+`;
+
+const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
+
+  thead {
+    background-color: ${({ theme }) => theme.colors.background};
+  }
+
+  th, td {
+    padding: ${({ theme }) => theme.spacing(2)};
+    text-align: left;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  }
+
+  th {
+    font-weight: ${({ theme }) => theme.typography.fontWeightBold};
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+
+  tbody tr:hover {
+    background-color: ${({ theme }) => theme.colors.primaryLight};
+    color: ${({ theme }) => theme.colors.surface};
+  }
 `;
 
-const Thead = styled.thead`
-  background-color: ${({ theme }) => theme.colors.neutralLight};
-`;
-
-const Th = styled.th`
-  padding: ${({ theme }) => theme.spacing.sm};
-  text-align: left;
-  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-`;
-
-const Td = styled.td`
-  padding: ${({ theme }) => theme.spacing.sm};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.neutralLight};
-`;
-
-const StatusTd = styled(Td)<{ $status: string }>`
-  text-align: center;
-`;
-
-const InvoicesTable: React.FC = () => {
+export const InvoicesTable: React.FC = () => {
   return (
-    <main>
-      <Table aria-label="Invoices Table">
-        <Thead>
+    <TableContainer aria-labelledby="invoices-heading">
+      <h2 id="invoices-heading" style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', border: 0 }}>
+        Invoices
+      </h2>
+      <StyledTable>
+        <thead>
           <tr>
-            <Th>Invoice ID</Th>
-            <Th>Client</Th>
-            <Th>Due Date</Th>
-            <Th>Total</Th>
-            <Th>Status</Th>
+            <th scope="col">Invoice #</th>
+            <th scope="col">Client</th>
+            <th scope="col">Date</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Status</th>
           </tr>
-        </Thead>
+        </thead>
         <tbody>
-          {tableData.map(({ id, client, dueDate, total, status }) => (
-            <tr key={id}>
-              <Td>{id}</Td>
-              <Td>{client}</Td>
-              <Td>{dueDate}</Td>
-              <Td>{total}</Td>
-              <StatusTd $status={status}>
-                <Badge status={status}>{status}</Badge>
-              </StatusTd>
+          {tableData.map(({ id, invoiceNumber, clientName, date, dueDate, amount, status }) => (
+            <tr key={id} tabIndex={0}>
+              <td>{invoiceNumber}</td>
+              <td>{clientName}</td>
+              <td>{date}</td>
+              <td>{dueDate}</td>
+              <td>{amount}</td>
+              <td><Badge $status={status}>{status}</Badge></td>
             </tr>
           ))}
         </tbody>
-      </Table>
-    </main>
+      </StyledTable>
+    </TableContainer>
   );
 };
-
-export default InvoicesTable;
